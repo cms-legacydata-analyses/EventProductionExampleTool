@@ -17,7 +17,7 @@ instructions are likely to be more useful for MC production.
 
 The present directives are essentially a short summary of the more-detailed documentation found in Chapter 6 of the [CMS Offline Workbook](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBook), which is publicly available.
 
-In this document the general strategy for event processing is first described.  Then, the `cmsDriver.py` script is presented. This is the steering script, which is used to generate almost any configuration needed.  Finally, simple examples for MC production and real data reconstruction are provided.
+In this document the general strategy for event processing is first described.  Then, the `cmsDriver.py` script is presented. This is the steering script, which is used to generate almost any configuration needed.  Finally, one can follow the simple examples for MC production and real data reconstruction in the individual packages in the repository.
 
 ## General strategy for event production
 
