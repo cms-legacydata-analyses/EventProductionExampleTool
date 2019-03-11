@@ -30,8 +30,7 @@ Then follow these steps:
   ```
 
 Next, identify the configuration fragment that determines what physics event generator we wish to use and what topology we intend to generate.  In
-this example we will use the `DYToLL_M_50_TuneZ2_7TeV_pythia6_tauola_cff.py` fragment , which can be found in the [/Configuration/Generator/python](https://github.com/cms-sw/cmssw/tree/CMSSW_4_2_X/Configuration/Generator/python) area of CMSSW.  More information on the parameters within this
-fragment can be found in the [MC production overview](/docs/cms-mc-production-overview) documentation.
+this example we will use the `DYToLL_M_50_TuneZ2_7TeV_pythia6_tauola_cff.py` fragment , which can be found in the [/Configuration/Generator/python](https://github.com/cms-sw/cmssw/tree/CMSSW_4_2_X/Configuration/Generator/python) area of CMSSW.  
 
 ##### Step 0: Generation and simulation
 
@@ -46,7 +45,7 @@ the */Configuration/Generator/python* area of the CMSSW release.  More informati
 
 Notice also that wee have used
 the `START42_V17B::All` conditions, because this is the snapshot of the conditions database we need.  More information about this can
-be found at the [CMS Guide for Conditions](docs/cms-guide-for-condition-database) documentation.  As noted above, for this first step, step 0, we
+be found at the [CMS Guide for Conditions](http://opendata.cern.ch/docs/cms-guide-for-condition-database) documentation.  As noted above, for this first step, step 0, we
 only do the *GEN* and *SIM* parts of the whole chain.  We only generate 10 events for this example and choose the name of *gensimDY* for the output files
 in order to identify them properly.
 
