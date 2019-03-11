@@ -1,4 +1,4 @@
-#How to produce MC Drell-Yan events from scratch with no Pile-up. (2010 epoch)
+# How to produce MC Drell-Yan events from scratch with no Pile-up. (2010 epoch)
 
 The objective of this example is to show how to generate Drell-Yan events *from scratch* and go through the full chain of
 production in order to obtain *reconstructed* events suitable for analysis.  All the python configuration files and ROOT files generated reside, respectively, in the *python* and *data* folders. 
