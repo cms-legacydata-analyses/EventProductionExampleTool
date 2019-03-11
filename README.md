@@ -51,8 +51,7 @@ The strategy is presented as a list of points (steps) that need to be considered
     [Pythia](http://home.thep.lu.se/~torbjorn/Pythia.html), 
     [Herwig](http://herwig.hepforge.org/), 
     [Tauola](https://tauolapp.web.cern.ch/tauolapp/), etc.)  This file
-    itself has many *physics* parameters that can be tuned. For more details about
-    this, one should check the [MC production overview](/docs/cms-mc-production-overview) documentation.
+    itself has many *physics* parameters that can be tuned. 
 - Identifying or creating a proper *initial* python configuration file  that defines the kind of process one is interested in is perhaps the most
 complicated part of the production chain.  Fortunately, CMSSW has pre-fabricated fragments which are originally located in the gen production areas (e.g., [/Configuration/Generator/python](https://github.com/cms-sw/cmssw/tree/CMSSW_4_2_X/Configuration/Generator/python) for 2010 production.).  
 For the majority of applications for producing MC samples the only difference will be this generator-level configuration fragment, while other conditions and steps will be standard. This is a great benefit of using `cmsDriver.py` for composing applications for MC production, as it will ensure that most current setups and conditions will be employed. 
@@ -101,7 +100,7 @@ The options list is divided into two sections according to the user's level of k
     - GEN
     - FASTSIM
 
-- `--conditions=CONDITIONS`: this option concerns the alignment and calibration [conditions](docs/cms-guide-for-condition-database) the user wants to apply for producing the dataset.
+- `--conditions=CONDITIONS`: this option concerns the alignment and calibration conditions the user wants to apply for producing the dataset.
 
 - `--eventcontent=EVENTCONTENT`: the user can select what event content has to be written out in the output by making use of this option.  The user can choose among those available in the files in [Configuration/EventContent/python/](https://github.com/cms-sw/cmssw/tree/master/Configuration/EventContent/python) directory.
 
