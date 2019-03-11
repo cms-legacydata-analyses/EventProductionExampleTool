@@ -1,9 +1,9 @@
-# How to produce MC Drell-Yan events from scratch with no Pile-up. (2010 epoch)
+# How to produce 2010 MC Drell-Yan events from scratch with no Pile-up
 
 The objective of this example is to show how to generate Drell-Yan events *from scratch* and go through the full chain of
 production in order to obtain *reconstructed* events suitable for analysis.  All the python configuration files and ROOT files generated reside, respectively, in the *python* and *data* folders. 
 
-For 2010 MC samples, *we will not perform the HLT simulation*.  We will produce these events in three steps.  First we perform the simulation up to the *SIM* step, then another intermedite step
+For 2010 MC samples, **we will not perform the HLT simulation**.  We will produce these events in three steps.  First we perform the simulation up to the *SIM* step, then another intermedite step
 up to the L1 (level 1 trigger) simulation, and then the reconstruction. 
 
 To start, first create a [VM](http://opendata.cern.ch/record/250 "CMS Open Data Portal") from the CMS Open Data website 
