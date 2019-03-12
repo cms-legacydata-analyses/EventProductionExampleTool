@@ -1,8 +1,8 @@
 # Auto generated configuration file
 # using: 
-# Revision: 1.303.2.7 
-# Source: /cvs_server/repositories/CMSSW/CMSSW/Configuration/PyReleaseValidation/python/ConfigBuilder.py,v 
-# with command line options: step2 --filein file:digiDY.root --fileout recoDY.root --mc --eventcontent AODSIM --pileup NoPileUp --customise Configuration/GlobalRuns/reco_TLR_42X.customisePPMC,Configuration/DataProcessing/Utils.addMonitoring --datatier AODSIM --conditions START42_V14B::All --step RAW2DIGI,L1Reco,RECO --python_filename recoDY.py --no_exec -n 10
+# Revision: 1.381.2.28 
+# Source: /local/reps/CMSSW/CMSSW/Configuration/PyReleaseValidation/python/ConfigBuilder.py,v 
+# with command line options: step2 --filein file:hltDY.root --step RAW2DIGI,L1Reco,RECO,VALIDATION:validation_prod,DQM:DQMOfflinePOGMC --datatier AODSIM,DQM --conditions START53_LV6::All --fileout=recoDY.root --mc --eventcontent AODSIM,DQM --python_filename recoDY.py --no_exec -n 10
 import FWCore.ParameterSet.Config as cms
 
 process = cms.Process('RECO')
@@ -13,11 +13,13 @@ process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
 process.load('FWCore.MessageService.MessageLogger_cfi')
 process.load('Configuration.EventContent.EventContent_cff')
 process.load('SimGeneral.MixingModule.mixNoPU_cfi')
-process.load('Configuration.StandardSequences.GeometryDB_cff')
+process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
 process.load('Configuration.StandardSequences.MagneticField_38T_cff')
 process.load('Configuration.StandardSequences.RawToDigi_cff')
 process.load('Configuration.StandardSequences.L1Reco_cff')
 process.load('Configuration.StandardSequences.Reconstruction_cff')
+process.load('Configuration.StandardSequences.Validation_cff')
+process.load('DQMOffline.Configuration.DQMOfflineMC_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
@@ -27,7 +29,8 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('file:digiDY.root')
+    secondaryFileNames = cms.untracked.vstring(),
+    fileNames = cms.untracked.vstring('file:hltDY.root')
 )
 
 process.options = cms.untracked.PSet(
@@ -36,7 +39,7 @@ process.options = cms.untracked.PSet(
 
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
-    version = cms.untracked.string('$Revision: 1.303.2.7 $'),
+    version = cms.untracked.string('$Revision: 1.381.2.28 $'),
     annotation = cms.untracked.string('step2 nevts:10'),
     name = cms.untracked.string('PyReleaseValidation')
 )
@@ -53,41 +56,38 @@ process.AODSIMoutput = cms.OutputModule("PoolOutputModule",
     )
 )
 
+process.DQMoutput = cms.OutputModule("PoolOutputModule",
+    splitLevel = cms.untracked.int32(0),
+    outputCommands = process.DQMEventContent.outputCommands,
+    fileName = cms.untracked.string('recoDY_inDQM.root'),
+    dataset = cms.untracked.PSet(
+        filterName = cms.untracked.string(''),
+        dataTier = cms.untracked.string('DQM')
+    )
+)
+
 # Additional output definition
 
 # Other statements
-#process.GlobalTag.globaltag = 'START42_V14B::All'
-process.GlobalTag.connect = cms.string('sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch/START42_V17B.db')
-process.GlobalTag.globaltag = 'START42_V17B::All'
+process.mix.playback = True
+process.RandomNumberGeneratorService.restoreStateLabel=cms.untracked.string("randomEngineStateProducer")
+from Configuration.AlCa.GlobalTag import GlobalTag
+#process.GlobalTag = GlobalTag(process.GlobalTag, 'START53_LV6::All', '')
+process.GlobalTag.connect = cms.string('sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch/START53_LV6A1.db')
+process.GlobalTag.globaltag = 'START53_LV6A1::All'
+
+
 
 # Path and EndPath definitions
 process.raw2digi_step = cms.Path(process.RawToDigi)
 process.L1Reco_step = cms.Path(process.L1Reco)
 process.reconstruction_step = cms.Path(process.reconstruction)
+process.dqmoffline_step = cms.Path(process.DQMOfflinePOGMC)
+process.validation_step = cms.EndPath(process.validation_prod)
 process.endjob_step = cms.EndPath(process.endOfProcess)
 process.AODSIMoutput_step = cms.EndPath(process.AODSIMoutput)
+process.DQMoutput_step = cms.EndPath(process.DQMoutput)
 
 # Schedule definition
-process.schedule = cms.Schedule(process.raw2digi_step,process.L1Reco_step,process.reconstruction_step,process.endjob_step,process.AODSIMoutput_step)
+process.schedule = cms.Schedule(process.raw2digi_step,process.L1Reco_step,process.reconstruction_step,process.validation_step,process.dqmoffline_step,process.endjob_step,process.AODSIMoutput_step,process.DQMoutput_step)
 
-# customisation of the process.
-
-# Automatic addition of the customisation function from Configuration.DataProcessing.Utils
-from Configuration.DataProcessing.Utils import addMonitoring 
-
-#call to customisation function addMonitoring imported from Configuration.DataProcessing.Utils
-process = addMonitoring(process)
-
-# Automatic addition of the customisation function from Configuration.GlobalRuns.reco_TLR_42X
-from Configuration.GlobalRuns.reco_TLR_42X import customisePPMC 
-
-#call to customisation function customisePPMC imported from Configuration.GlobalRuns.reco_TLR_42X
-process = customisePPMC(process)
-
-# End of customisation functions
-#modify the localreco sequence so it does not requiere luminosity production
-process.localreco.remove(process.lumiProducer)
-
-#for consistency, remove products from event content
-process.AODSIMoutput.outputCommands.remove('keep LumiSummary_lumiProducer_*_*')
-process.AODSIMoutput.outputCommands.append('drop LumiSummary_lumiProducer_*_*')
