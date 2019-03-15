@@ -211,11 +211,11 @@ For this example use an existing EDAnalyzer called SaveHits for more information
 
 - Obtain the code from git:
 ```
-git clone git://github.com/CesMon/MCMLSAMPLES.git
+git clone git://github.com/CesMon/EdAnalyzer.git
 ```
-- Change to ML_samples/SaveHits/ directory
+- Change to EdAnalyzerr/ directory
 ```
-cd MCMLSAMPLES/SaveHits/
+cd EdAnalyzer
 ```
 - Compile everything:
 ```
@@ -225,6 +225,16 @@ scram b
 ```
 ln -s python/step3.py .
 ```
+We need to make the following
+ symbolic links:
+
+```
+ln -sf /cvmfs/cms-opendata-conddb.cern.ch/START53_V27 START53_V27
+
+ln -sf /cvmfs/cms-opendata-conddb.cern.ch/START53_V27.db START53_V27.db
+```
+
+
 - Run the CMSSW configuration file
 ```
 cmsRun step3.py
