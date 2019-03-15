@@ -28,7 +28,7 @@ process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use
     fileNames = cms.untracked.vstring(
        
-        'file:/home/cms-opendata/CMSSW_5_3_32/src/MCQCDProductionMLTrackINFO/recoQCD.root'
+        'file:/home/cms-opendata/CMSSW_5_3_32/src/recoQCD.root'
           )
 )
 
