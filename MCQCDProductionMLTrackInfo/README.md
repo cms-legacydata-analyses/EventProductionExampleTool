@@ -213,7 +213,7 @@ For this example use an existing EDAnalyzer called SaveHits for more information
 ```
 git clone git://github.com/CesMon/EdAnalyzer.git
 ```
-- Change to EdAnalyzerr/ directory
+- Change to EdAnalyzer directory
 ```
 cd EdAnalyzer
 ```
