@@ -111,7 +111,8 @@ tailf gensimML.log
 - Execute the *cmsDriver* command as:
 
 ```
-cmsDriver.py step1 --filein file:gensimQCD.root --fileout file:hltQCD.root --mc --eventcontent RAWSIM --runsScenarioForMC Run2012_AB_C_D_oneRunPerEra  --datatier GEN-SIM-RAW --conditions=START53_V27::All --step DIGI,L1,DIGI2RAW,HLT:7E33v2 --python_filename hltQCD.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 10
+cmsDriver.py step1 --filein file:gensimQCD.root --fileout file:hltQCD.root --mc --eventcontent RAWSIM --runsScenarioForMC Run2012_AB_C_D_oneRunPerEra --datatier GEN-SIM-RAW --conditions=START53_V27::All --step DIGI,L1,DIGI2RAW,HLT:7E33v2 --python_filename hltQCD.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 10 --pileup_input root://eospublic.cern.ch//eos/opendata/cms/MonteCarlo2012/Summer12/MinBias_TuneZ2star_8TeV-pythia6/GEN-SIM/START50_V13-v3/0002/FEF2F4CC-0E6A-E111-96F6-0030487F1C57.root --pileup 2012_Summer_50ns_PoissonOOTPU
+
 ```
 
 Note here that the ROOT file *gensimQCD.root*, which was obtained in the last step (step 0), serves as input for step1.  
@@ -219,21 +220,6 @@ cd MCMLSAMPLES/SaveHits/
 - Compile everything:
 ```
 scram b
-```
-- Note that we need to be able to locate the database conditions as required by the *--conditions* switch.  Therefore, we need to make the following
- symbolic links:
-
-```
-ln -sf /cvmfs/cms-opendata-conddb.cern.ch/START53_V27 START53_V27
-
-ln -sf /cvmfs/cms-opendata-conddb.cern.ch/START53_V27.db START53_V27.db
-```
-
-- Make sure the `cms-opendata-conddb.cern.ch` directory has actually expanded in your VM.  One way of doing this is executing:
-
-```
-ls -l
-ls -l /cvmfs/
 ```
 
 - Run the CMSSW configuration file
