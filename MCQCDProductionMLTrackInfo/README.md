@@ -221,7 +221,10 @@ cd MCMLSAMPLES/SaveHits/
 ```
 scram b
 ```
-
+- Make a soft link to the python configuration file
+```
+ln -s python/step3.py .
+```
 - Run the CMSSW configuration file
 ```
 cmsRun step3.py
