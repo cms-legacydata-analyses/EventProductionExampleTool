@@ -1,5 +1,5 @@
 # How to produce 2012 MC QCD events with Tracker Hits info from scratch with Pile-up (good for Machine Learning studies) 
-This sample is an special one in the sense that it has use low-level tracking information with ML to create event-level or jetlevel classifiers,  also gives us position of pixel and strip tracker hits in simple ntuple-like format,this is useful because in AOD opendata files  no tracker rechits available.
+This sample is an special one in the sense that it has use low-level tracking information with ML to create event-level or jetlevel classifiers,  also gives us position of pixel and strip tracker hits in simple ntuple-like format, this is useful because in AOD opendata files  no tracker rechits available.
 
 
 
@@ -64,7 +64,7 @@ the */Configuration/Generator/python* area of the CMSSW release.  More informati
 Notice also that we have used
 the `START53_V27::All` conditions, because this is the snapshot of the conditions database we need.  More information about this can
 be found at the [CMS Guide for Conditions]( http://opendata.cern.ch/docs/cms-guide-for-condition-database) documentation.  As noted above, for this first step, step 0, we
-only do the *GEN* and *SIM* parts of the whole chain.  We only generate 10 events for this example and choose the name of *gensimQCD* for the output files
+only do the *GEN* and *SIM* parts of the whole chain.  We only generate 10 events that for this example is the minimum and choose the name of *gensimQCD* for the output files
 in order to identify them correctly.
 
 After executing this command, we will get the *gensimQCD.py* configuration file, which will be run with the *cmsRun* executable.  First, however, we need
