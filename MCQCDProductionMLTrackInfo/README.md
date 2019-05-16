@@ -1,11 +1,10 @@
 # How to produce 2012 MC QCD events with Tracker Hits info from scratch with Pile-up (good for Machine Learning studies) 
-This sample is an special one in the sense that it has use low-level tracking information with ML to create event-level or jetlevel classifiers,  also gives us position of pixel and strip tracker hits in simple ntuple-like format, this is useful because in AOD opendata files  no tracker rechits available.
-
+This sample is an special one in the sense that it uses low-level tracking information to create event-level or jetlevel classifiers for ML; it also gives us position of pixel and strip tracker hits in simple ntuple-like format, this is useful because in AOD opendata files  no tracker rechits are available.
 
 
 We will produce these events in four steps.  First we perform the simulation up to the *SIM* step, then another step
 up to the *HLT* simulation, then up to the reconstruction *RECO*, and then finaly extract information from a CMS root file type EDM  by
-an EDAnalyzer in *NTUPLE* format. 
+an EDAnalyzer in ROOT *ntuple* format. 
 
 To start, first create a [VM](http://opendata.cern.ch/record/252 "CMS Open Data Portal") from the CMS Open Data website.
 
@@ -29,7 +28,7 @@ Then follow these steps:
   cmsenv
   ```   
 
-In this example we will use the code of an EDAnalyzer that will give us the information in NTUPLE format for this follow these steps:
+In this example we will use the code of an EDAnalyzer that will give us the information in NTUPLE format. Therefore, start with these steps:
 
 - Obtain the code from git:
 
@@ -100,7 +99,7 @@ with
 process.GlobalTag.connect = cms.string('sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch/START53_V27.db')
 process.GlobalTag = GlobalTag(process.GlobalTag, 'START53_V27::All', '')
 ```
-This sample is dedicated to studying 'boosted' events, that we need change the parameter pThat threshold  in a pythia generator v6 from pThat>15 to pThat>600 , for more information of this parameters visit [pythia documentation](http://home.thep.lu.se/Pythia/).
+This sample is dedicated to studying 'boosted' events so we need change the parameter *pThat* threshold  in a pythia generator v6 from pThat>15 to pThat>600 , for more information of this parameters visit [pythia documentation](http://home.thep.lu.se/Pythia/).
 
 - For this in the *gensimQCD.py* change the line
 
@@ -116,13 +115,13 @@ with
 - Run the CMSSW executable in the background
 
 ```
-cmsRun gensimQCD.py > gensimML.log 2>&1 &
+cmsRun gensimQCD.py > gensimQCD.log 2>&1 &
 ``` 
 
 - Check the development of the job:
 
 ```
-tailf gensimML.log
+tailf gensimQCD.log
 ```
 
 
@@ -135,7 +134,10 @@ tailf gensimML.log
 cmsDriver.py step1 --filein file:gensimQCD.root --fileout file:hltQCD.root --mc --eventcontent RAWSIM --runsScenarioForMC Run2012_AB_C_D_oneRunPerEra --datatier GEN-SIM-RAW --conditions=START53_V27::All --step DIGI,L1,DIGI2RAW,HLT:7E33v2 --python_filename hltQCD.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 10 --pileup_input root://eospublic.cern.ch//eos/opendata/cms/MonteCarlo2012/Summer12/MinBias_TuneZ2star_8TeV-pythia6/GEN-SIM/START50_V13-v3/0002/FEF2F4CC-0E6A-E111-96F6-0030487F1C57.root --pileup 2012_Summer_50ns_PoissonOOTPU
 ```
 
-Note here that the ROOT file *gensimQCD.root*, which was obtained in the last step (step 0), serves as input for step1.  
+Note here that the ROOT file *gensimQCD.root*, which was obtained in the last step (step 0), serves as input for step 1.  
+
+The MinBias file with pile-up events used is a particular example made available for these instructions. Be aware that these files may or may not be available as part of an official release, and that one may need to simulate those as well.
+
 We now process the event up to the high level trigger (HLT) simulation.  This command produces a file, *hltQCD.py*, which needs to be modified
 like we did above.  I.e.,
 
@@ -226,7 +228,7 @@ the MC and Data released by CMS.
 
 ##### step 3: NTUPLE
 The instructions to write your own EDAnalyzer are [here](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookWriteFrameworkModule).
-For this example use an existing EDAnalyzer called SaveHits for more information on the parameters within this can be found in this [repository](https://github.com/emanueleusai/opendatadnn/tree/master/SaveHits/SaveHits).
+For this example use an existing EDAnalyzer called SaveHits. For more information on the parameters within this can be found in this [repository](https://github.com/emanueleusai/opendatadnn/tree/master/SaveHits/SaveHits).
 
 - Make a soft link to the python configuration file
   ```
@@ -238,5 +240,5 @@ For this example use an existing EDAnalyzer called SaveHits for more information
   cmsRun MLntupleQCD.py
   ```
 
-##### As a result you will get a NtupleQCD.root file with simple variables and histograms.
+As a result you will get a NtupleQCD.root file with simple variables and histograms that can be used for machine learning studies.
 
