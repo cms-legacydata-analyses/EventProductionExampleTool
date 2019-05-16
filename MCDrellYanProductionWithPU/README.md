@@ -37,11 +37,11 @@ cmsDriver.py DYToLL_M_50_TuneZ2_7TeV_pythia6_tauola_cff.py --mc --beamspot Reali
 ```
 
 Note that we put the naked name of our input fragment (*DYToLL_M_50_TuneZ2_7TeV_pythia6_tauola_cff.py*) because the script will look, by default, in
-the */Configuration/Generator/python* area of the CMSSW release.  More information about the *--datatier* used can be found at the [CMS Workbook](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookDataFormats); that is the level of information we need/want in our ROOT output file.
+the */Configuration/Generator/python* area of the CMSSW release.  More information about the *--datatier* used can be found in the [CMS Workbook](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookDataFormats); that is the level of information we need/want in our ROOT output file.
 
 Notice also that wee have used
 the `START53_LV6A1::All` conditions, because this is the snapshot of the conditions database we need.  More information about this can
-be found at the [CMS Guide for Conditions](http://opendata.cern.ch/docs/cms-guide-for-condition-database) documentation.  As noted above, for this first step, step 0, we
+be found in the [CMS Guide for Conditions](http://opendata.cern.ch/docs/cms-guide-for-condition-database) documentation.  As noted above, for this first step, step 0, we
 only do the *GEN* and *SIM* parts of the whole chain.  We only generate 10 events for this example and choose the name of *gensimDY* for the output files
 in order to identify them correctly.
 
@@ -102,6 +102,9 @@ cmsDriver.py step1 --filein file:gensimDY.root --fileout=hltDY.root --mc --event
 ```
 
 Note here that the ROOT file *gensimDY.root*, which was obtained in the last step (step 0), serves as input for step1.  
+
+The MinBias file with pile-up events used is a particular example made available for these instructions.  Be aware that these files may or may not be available as part of an official release, and that one may need to simulate those as well.
+
 We now process the event up to the high level trigger (HLT) simulation.  This command produces a file, *hltDY.py*, which needs to be modified
 like we did above.  I.e.,
 
