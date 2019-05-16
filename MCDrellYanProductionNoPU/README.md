@@ -41,11 +41,11 @@ cmsDriver.py DYToLL_M_50_TuneZ2_7TeV_pythia6_tauola_cff.py --mc --eventcontent=R
 ```
 
 Note that we put the naked name of our input fragment (*DYToLL_M_50_TuneZ2_7TeV_pythia6_tauola_cff.py*) because the script will look, by default, in
-the */Configuration/Generator/python* area of the CMSSW release.  More information about the *--datatier* used can be found at the [CMS Workbook](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookDataFormats); that is the level of information we need/want in our ROOT output file.  
+the */Configuration/Generator/python* area of the CMSSW release.  More information about the *--datatier* used, i.e. the level of information we need/want in our ROOT output file, can be found in the [CMS Workbook](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookDataFormats).
 
 Notice also that wee have used
 the `START42_V17B::All` conditions, because this is the snapshot of the conditions database we need.  More information about this can
-be found at the [CMS Guide for Conditions](http://opendata.cern.ch/docs/cms-guide-for-condition-database) documentation.  As noted above, for this first step, step 0, we
+be found in the [CMS Guide for Conditions](http://opendata.cern.ch/docs/cms-guide-for-condition-database) documentation.  As noted above, for this first step, step 0, we
 only do the *GEN* and *SIM* parts of the whole chain.  We only generate 10 events for this example and choose the name of *gensimDY* for the output files
 in order to identify them properly.
 
@@ -53,7 +53,7 @@ After executing this command, we will get the *gensimDY.py* configuration file, 
 to do a few modifications.
 
 - Note that we need to be able to locate the database conditions as required by the *--conditions* switch.  Therefore, we need to make the following
- symbolic links:
+ symbolic links.  In the terminal, in the same area do:
 
 ```
 ln -sf /cvmfs/cms-opendata-conddb.cern.ch/START42_V17B START42_V17B
@@ -103,7 +103,7 @@ tailf gensimDY.log
 cmsDriver.py step1 --filein file:gensimDY.root --step=DIGI,L1,DIGI2RAW --datatier GEN-SIM-RAW --conditions=START42_V17B::All --fileout=digiDY.root --eventcontent RAWSIM --python_filename hltDY.py --number=10 --mc --no_exec
 ```
 
-Note here that the ROOT file *gensimDY.root*, which was obtained in the last step (step 0), serves as input for step1.  
+Note here that the ROOT file *gensimDY.root*, which was obtained in the last step (step 0), serves as input for step 1.  
 We now process the event up to the L1 (level 1 trigger) simulation.  No HLT simulation is performed for MC datsets for 2010.  
 
 The command produces a file, *digiDY.py*, which needs to be modified
@@ -142,7 +142,7 @@ tailf digiDY.log
 cmsDriver.py step2 --filein file:digiDY.root --fileout recoDY.root --mc --eventcontent AODSIM --pileup NoPileUp --customise Configuration/GlobalRuns/reco_TLR_42X.customisePPMC,Configuration/DataProcessing/Utils.addMonitoring --datatier AODSIM --conditions START42_V14B::All --step RAW2DIGI,L1Reco,RECO --python_filename recoDY.py --no_exec -n 10
 ```
 
-Note here that the ROOT file *gensimDY.root*, which was obtained in the last step (step 0), serves as input for step1.  In addition, the configuration file
+Note here that the ROOT file *gensimDY.root*, which was obtained in the last step (step 1), serves as input for step 2.  In addition, the configuration file
 is customized in the same fashion as the latest CMS production for this epoch. 
 We now process the event up to the final step: the reconstruction (RECO).  This command produces a file, *recoDY.py*, which needs to be modified
 like we did above.  I.e.,
