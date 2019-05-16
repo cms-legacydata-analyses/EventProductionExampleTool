@@ -37,11 +37,11 @@ cmsDriver.py DYToLL_M_50_TuneZ2_7TeV_pythia6_tauola_cff.py --mc --eventcontent=R
 ```
 
 Note that we put the naked name of our input fragment (*DYToLL_M_50_TuneZ2_7TeV_pythia6_tauola_cff.py*) because the script will look, by default, in
-the */Configuration/Generator/python* area of the CMSSW release.  More information about the *--datatier* used can be found at the [CMS Workbook](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookDataFormats); that is the level of information we need/want in our ROOT output file.
+the */Configuration/Generator/python* area of the CMSSW release.  More information about the *--datatier* used can be found in the [CMS Workbook](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookDataFormats); that is the level of information we need/want in our ROOT output file.
 
 Notice also that wee have used
 the `START53_LV6A1::All` conditions, because this is the snapshot of the conditions database we need.  More information about this can
-be found at the [CMS Guide for Conditions](http://opendata.cern.ch/docs/cms-guide-for-condition-database) documentation.  As noted above, for this first step, step 0, we
+be found in the [CMS Guide for Conditions](http://opendata.cern.ch/docs/cms-guide-for-condition-database) documentation.  As noted above, for this first step, step 0, we
 only do the *GEN* and *SIM* parts of the whole chain.  We only generate 10 events for this example and choose the name of *gensimDY* for the output files
 in order to identify them correctly.
 
@@ -101,7 +101,7 @@ tailf gensimDY.log
 cmsDriver.py step1 --filein file:gensimDY.root --step=DIGI,L1,DIGI2RAW,HLT:2011 --datatier GEN-RAW --conditions=START53_LV6A1::All --fileout=hltDY.root --eventcontent RAWSIM --python_filename hltDY.py --number=10 --mc --no_exec
 ```
 
-Note here that the ROOT file *gensimDY.root*, which was obtained in the last step (step 0), serves as input for step1.  
+Note here that the ROOT file *gensimDY.root*, which was obtained in the last step (step 0), serves as input for step 1.  
 We now process the event up to the high level trigger (HLT) simulation.  This command produces a file, *hltDY.py*, which needs to be modified
 like we did above.  I.e.,
 
@@ -139,7 +139,7 @@ tailf hltDY.log
 cmsDriver.py step2 --filein file:hltDY.root --step RAW2DIGI,L1Reco,RECO,VALIDATION:validation_prod,DQM:DQMOfflinePOGMC --datatier AODSIM,DQM --conditions START53_LV6::All --fileout=recoDY.root --mc --eventcontent AODSIM,DQM  --python_filename recoDY.py --no_exec -n 10 
 ```
 
-Note here that the ROOT file *hltDY.root*, which was obtained in the last step (step 1), serves as input for step2.  
+Note here that the ROOT file *hltDY.root*, which was obtained in the last step (step 1), serves as input for step 2.  
 We now process the event up to the final step: the reconstruction (RECO).  This command produces a file, *recoDY.py*, which needs to be modified
 like we did above.  I.e.,
 
