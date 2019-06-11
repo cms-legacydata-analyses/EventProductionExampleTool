@@ -69,7 +69,7 @@ You should now see the `cms-opendata-conddb.cern.ch` link in the `/cvmfs` area.
 - Open the *gensimDY.py* config file with your favorite text editor and replace the line
 
 ```
-process.GlobalTag.globaltag = 'START53_LV6A1::All'
+process.GlobalTag = GlobalTag(process.GlobalTag, 'START53_LV6A1::All', '')
 ```
 
 with
@@ -85,7 +85,7 @@ process.GlobalTag.globaltag = 'START53_LV6A1::All'
 cmsRun gensimDY.py > gensimDY.log 2>&1 &
 ``` 
 
-- Check the development of the job:
+- Optionally, check the development of the job. You can do this periodically and exit at any time with CTRL+C:
 
 ```
 tailf gensimDY.log
@@ -111,7 +111,7 @@ like we did above.  I.e.,
 - open the *hltDY.py* config file with your favorite text editor and replace the line
 
 ```
-process.GlobalTag.globaltag = 'START53_LV6A1::All'
+process.GlobalTag = GlobalTag(process.GlobalTag, 'START53_LV6A1::All', '')
 ```
 
 with
@@ -127,7 +127,7 @@ process.GlobalTag.globaltag = 'START53_LV6A1::All'
 cmsRun hltDY.py > hltDY.log 2>&1 &
 ``` 
 
-- Check the development of the job:
+- Optionally, check the development of the job. You can do this periodically and exit at any time with CTRL+C:
 
 ```
 tailf hltDY.log
@@ -149,7 +149,7 @@ like we did above.  I.e.,
 - open the *recoDY.py* config file with your favorite text editor and replace the line
 
 ```
-process.GlobalTag.globaltag = 'START53_LV6A1::All'
+process.GlobalTag = GlobalTag(process.GlobalTag, 'START53_LV6A1::All', '')
 ```
 
 with
@@ -165,7 +165,7 @@ process.GlobalTag.globaltag = 'START53_LV6A1::All'
 cmsRun recoDY.py > recoDY.log 2>&1 &
 ``` 
 
-- Check the development of the job:
+- Optionally, check the development of the job. You can do this periodically and exit at any time with CTRL+C:
 
 ```
 tailf recoDY.log
