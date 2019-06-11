@@ -89,7 +89,7 @@ process.GlobalTag.globaltag = 'START42_V17B::All'
 cmsRun gensimDY.py > gensimDY.log 2>&1 &
 ``` 
 
-- Check the development of the job:
+- Optionally, check the development of the job.  You can do this periodically and exit at any time with CTRL+C:
 
 ```
 tailf gensimDY.log
@@ -128,7 +128,7 @@ process.GlobalTag.globaltag = 'START42_V17B::All'
 cmsRun digiDY.py > digiDY.log 2>&1 &
 ``` 
 
-- Check the development of the job:
+- Optionally, check the development of the job.  You can do this periodically and exit at any time with CTRL+C:
 
 ```
 tailf digiDY.log
@@ -177,7 +177,7 @@ process.AODSIMoutput.outputCommands.append('drop LumiSummary_lumiProducer_*_*')
 cmsRun recoDY.py > recoDY.log 2>&1 &
 ``` 
 
-- Check the development of the job:
+- Optionally, check the development of the job.  You can do this periodically and exit at any time with CTRL+C:
 
 ```
 tailf recoDY.log

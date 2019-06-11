@@ -76,7 +76,7 @@ A summary of the `cmsDriver.py` wrapper's options, with a detailed message about
 cmsDriver.py --help
 ```
 
-The options list is divided into two sections according to the user's level of knowledge: Options and Expert Options. Here, only the former, the "standar" Options, are listed:
+The options list is divided into two sections according to the user's level of knowledge: Options and Expert Options. Here, only the former, the "standard" Options, are listed:
 
 - `-s STEP, --step=STEP`: this option is useful to indicate what kind of steps the user wants to run and in which order. The most common, possible values for *STEP* are: 
 
