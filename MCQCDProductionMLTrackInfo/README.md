@@ -118,7 +118,7 @@ with
 cmsRun gensimQCD.py > gensimQCD.log 2>&1 &
 ``` 
 
-- Check the development of the job:
+- Optionally, check the development of the job. You can do this periodically and exit at any time with CTRL+C:
 
 ```
 tailf gensimQCD.log
@@ -170,7 +170,7 @@ outputCommands = process.RAWSIMEventContent.outputCommands+cms.untracked.vstring
 cmsRun hltQCD.py > hltQCD.log 2>&1 &
 ``` 
 
-- Check the development of the job:
+- Optionally, check the development of the job. You can do this periodically and exit at any time with CTRL+C:
 
 ```
 tailf hltQCD.log
@@ -217,7 +217,7 @@ outputCommands = process.AODSIMEventContent.outputCommands+cms.untracked.vstring
 cmsRun recoQCD.py > recoQCD.log 2>&1 &
 ``` 
 
-- Check the development of the job:
+- Optionally, check the development of the job. You can do this periodically and exit at any time with CTRL+C:
 
 ```
 tailf recoQCD.log
